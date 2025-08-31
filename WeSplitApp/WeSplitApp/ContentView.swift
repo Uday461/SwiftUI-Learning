@@ -13,7 +13,6 @@ import SwiftUI
 //@State: A property wrapper that is useful for having a value that can be modified. It is recommended to be `private`
 //Two-way Binding: We bind the text field so that it shows the value of our property, but we also bind so that any changes to the text field also update the property. We use '$' symbol for binding.
 
-
 struct ContentView: View {
     @State private var tapCount = 0
     @State private var name = ""
