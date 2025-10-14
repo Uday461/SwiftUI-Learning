@@ -49,9 +49,7 @@ struct GuessTheFlagView: View {
                             flagTapped(number)
                             questionNumber += 1
                         } label: {
-                            Image(countries[number].lowercased())
-                                .clipShape(.capsule)
-                                .shadow(radius: 5)
+                            FlagImage(countryName: countries[number].lowercased())
                         }
                     }
                 }
@@ -93,6 +91,16 @@ struct GuessTheFlagView: View {
     func reset() {
         questionNumber = 1
         score = 0
+    }
+}
+
+struct FlagImage: View {
+    let countryName: String
+    
+    var body: some View {
+        Image(countryName)
+            .clipShape(.capsule)
+            .shadow(radius: 5)
     }
 }
 

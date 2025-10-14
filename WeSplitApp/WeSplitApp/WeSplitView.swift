@@ -13,6 +13,7 @@ struct WeSplitView: View {
     @State private var tipPercentage = 20
     private let tipPercentages = [10, 15, 20, 25, 0]
     @FocusState private var amountIsFocused: Bool
+    @State private var isTipAmountZero = false
     
     var body: some View {
         NavigationStack {
@@ -21,6 +22,7 @@ struct WeSplitView: View {
                     TextField("Amount", value: $checkAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                         .keyboardType(.decimalPad)
                         .focused($amountIsFocused)
+                        .foregroundStyle(isTipAmountZero ? .red : .black)
                     
                     Picker("Number of people", selection: $numberOfpeople) {
                         ForEach(2..<100) { Text("\($0) of people") }
@@ -33,6 +35,9 @@ struct WeSplitView: View {
                         ForEach(tipPercentages, id: \.self) { Text("\($0)") }
                     }
                     .pickerStyle(.segmented)
+                    .onChange(of: tipPercentage) { newValue in
+                        isTipAmountZero = (newValue == 0)
+                    }
                 }
                 .textCase(.lowercase)
                 
